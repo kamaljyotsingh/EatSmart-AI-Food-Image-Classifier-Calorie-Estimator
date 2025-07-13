@@ -72,15 +72,13 @@ The system currently supports classification of the following food items:
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-Our modern home page features a beautiful gradient design with smooth animations and intuitive navigation.
+![Home Page](screenshots/Screenshot%202025-07-13%20at%203.19.45%E2%80%AFPM.png)
 
 ### 🔍 Prediction Interface
-The prediction page allows users to upload food images and get instant classification results with detailed nutritional information.
+![Prediction](screenshots/Screenshot%202025-07-13%20at%203.19.55%E2%80%AFPM.png)
 
 ### 📊 Results Display
-Results are presented in an elegant card layout showing food classification, calorie estimates, and nutritional breakdown.
-
-> **Note**: Screenshots will be updated with actual app images. The current design features a modern gradient interface with smooth animations and responsive layout.
+![Results](screenshots/Screenshot%202025-07-13%20at%203.20.13%E2%80%AFPM.png)
 
 ## 🧠 Model Architecture
 
