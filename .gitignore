@@ -50,10 +50,14 @@ Thumbs.db
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Model files (optional - uncomment if you don't want to track large model files)
-# *.h5
-# *.pkl
-# *.joblib
+# Model files (large files - don't track)
+*.h5
+*.pkl
+*.joblib
+
+# Installer files
+*.sh
+Miniconda3-*.sh
 
 # Logs
 *.log
