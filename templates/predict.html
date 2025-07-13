@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze Food - EatSmart AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>EatSmart AI</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="{{ url_for('main_page') }}" class="nav-link">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('predict') }}" class="nav-link active">
+                        <i class="fas fa-camera"></i> Analyze Food
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="analyze-container">
+        <div class="container">
+            <!-- Header -->
+            <div class="analyze-header">
+                <h1>Food Analysis</h1>
+                <p>Upload a photo of your food to get instant nutritional insights</p>
+            </div>
+
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <form method="post" action="/predict" enctype="multipart/form-data" class="upload-form">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Choose an image or drag it here</h3>
+                            <p>Supports JPG, PNG, GIF up to 16MB</p>
+                            <input type="file" name="file" id="fileInput" accept="image/*" required style="display: none;">
+                            <button type="button" class="btn btn-outline" onclick="document.getElementById('fileInput').click()">
+                                <i class="fas fa-folder-open"></i> Browse Files
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Preview Section -->
+                    {% if filename %}
+                    <div class="preview-section">
+                        <div class="preview-card">
+                            <img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded food" class="preview-image">
+                            <div class="preview-info">
+                                <span class="file-name">{{ filename }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="submit-section">
+                        <button type="submit" class="btn btn-primary" {% if not filename %}disabled{% endif %} id="analyzeBtn">
+                            <i class="fas fa-magic"></i> Analyze Image
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <!-- Results Section -->
+            {% if name %}
+            <div class="results-section">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h2>Analysis Results</h2>
+                        <div class="confidence-badge">
+                            <i class="fas fa-check-circle"></i> High Confidence
+                        </div>
+                    </div>
+                    
+                    <div class="result-content">
+                        <div class="food-info-card">
+                            <div class="food-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="food-details">
+                                <h3>{{ name }}</h3>
+                                <div class="calorie-display">
+                                    <span class="calorie-value">{{ calories }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="nutrition-info">
+                            <h4>Nutritional Information</h4>
+                            <p>{{ description }}</p>
+                        </div>
+                        
+                        <div class="health-tips">
+                            <h4>Health Tips</h4>
+                            <div class="tips-grid">
+                                <div class="tip-item">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Good for heart health</span>
+                                </div>
+                                <div class="tip-item">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>Rich in nutrients</span>
+                                </div>
+                                <div class="tip-item">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <span>Moderate portion size</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EatSmart AI</h3>
+                    <p>Empowering healthier choices through intelligent food analysis.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{{ url_for('main_page') }}">Home</a></li>
+                        <li><a href="{{ url_for('predict') }}">Analyze Food</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 EatSmart AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // File upload handling
+        const fileInput = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Show preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadArea.innerHTML = `
+                        <div class="upload-content">
+                            <img src="${e.target.result}" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 8px;">
+                            <h3>${file.name}</h3>
+                            <p>Ready to analyze</p>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-magic"></i> Analyze Image
+                            </button>
+                        </div>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                fileInput.dispatchEvent(new Event('change'));
+            }
+        });
+    </script>
+</body>
+</html>

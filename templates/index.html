@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EatSmart AI - Intelligent Food Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>EatSmart AI</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="{{ url_for('main_page') }}" class="nav-link active">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('predict') }}" class="nav-link">
+                        <i class="fas fa-camera"></i> Analyze Food
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Discover Your Food's 
+                    <span class="gradient-text">Nutritional Secrets</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Upload a photo of your meal and get instant calorie estimates, nutritional insights, and personalized recommendations powered by advanced AI.
+                </p>
+                <div class="hero-buttons">
+                    <a href="{{ url_for('predict') }}" class="btn btn-primary">
+                        <i class="fas fa-camera"></i> Start Analyzing
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <i class="fas fa-info-circle"></i> Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="food-showcase">
+                    <div class="food-item" style="--delay: 0s">
+                        <img src="{{ url_for('static', filename='images/apple.jpg') }}" alt="Apple">
+                        <div class="food-info">
+                            <span class="food-name">Apple</span>
+                            <span class="food-calories">52 kcal</span>
+                        </div>
+                    </div>
+                    <div class="food-item" style="--delay: 0.5s">
+                        <img src="{{ url_for('static', filename='images/banana.jpg') }}" alt="Banana">
+                        <div class="food-info">
+                            <span class="food-name">Banana</span>
+                            <span class="food-calories">89 kcal</span>
+                        </div>
+                    </div>
+                    <div class="food-item" style="--delay: 1s">
+                        <img src="{{ url_for('static', filename='images/pizza.jpg') }}" alt="Pizza">
+                        <div class="food-info">
+                            <span class="food-name">Pizza</span>
+                            <span class="food-calories">266 kcal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Snap a Photo</h3>
+                    <p>Take a clear photo of your food or upload an existing image from your device.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Analysis</h3>
+                    <p>Our advanced neural network identifies the food type and analyzes its visual characteristics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Get Insights</h3>
+                    <p>Receive detailed calorie estimates, nutritional information, and health recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Foods -->
+    <section class="supported-foods">
+        <div class="container">
+            <h2 class="section-title">Supported Food Categories</h2>
+            <div class="food-categories">
+                <div class="category-item">
+                    <i class="fas fa-apple-alt"></i>
+                    <span>Fruits</span>
+                </div>
+                <div class="category-item">
+                    <i class="fas fa-egg"></i>
+                    <span>Proteins</span>
+                </div>
+                <div class="category-item">
+                    <i class="fas fa-bread-slice"></i>
+                    <span>Grains</span>
+                </div>
+                <div class="category-item">
+                    <i class="fas fa-carrot"></i>
+                    <span>Vegetables</span>
+                </div>
+                <div class="category-item">
+                    <i class="fas fa-cookie-bite"></i>
+                    <span>Snacks</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EatSmart AI</h3>
+                    <p>Empowering healthier choices through intelligent food analysis.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{{ url_for('main_page') }}">Home</a></li>
+                        <li><a href="{{ url_for('predict') }}">Analyze Food</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 EatSmart AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to food items
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.food-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
