@@ -1,69 +1,190 @@
-# Multiclass-Food-Classification-and-Calorie-Estimation
-### Overview
-<p align="justify">
-Maintaining a healthy diet is an important goal for many people. The main cause of not maintaining it lies in the imbalance between the amount of calories intake and daily physical activity. One way to achieve this is by tracking the amount of
-calories consumed.<br/>
-Presently, most of the available calorie estimation tools require the user to enter some information about the food item, and its size. Our proposed approach
-alleviates this task of users by automatically estimating the calories from food images.<br/>
-We propose a Multiclass food classification using a food image dataset, and then estimating the weight and the calorie content in the respective food item using deep
-learning and computer vision techniques.<br/>
-</p>
+# 🍎 EatSmart AI - Food Image Classifier & Calorie Estimator
 
-### Dataset
-<p align="justify">
-The dataset consisted of 2 resources through which the data has been combined.
-Both the datasets are available on the internet.
-</p>
+<div align="center">
+  <img src="static/images/logo.png" alt="EatSmart AI Logo" width="200"/>
+  
+  [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/downloads/)
+  [![Flask](https://img.shields.io/badge/Flask-2.3+-green.svg)](https://flask.palletsprojects.com/)
+  [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.13+-orange.svg)](https://tensorflow.org/)
+  [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+</div>
 
-**Resources**
-1. FOODD Dataset
-2. ECUST Food Dataset (ECUSTFD) (https://github.com/Liang-yc/ECUSTFD-resized-)
+## 🌟 Overview
 
-<p align="justify">
-The dataset is combined from both resources and contains around 2500 images for
-10 classes of food which includes the top and side view of the food. The dataset is
-annotated with the density and calorie information per 100 gm serving of the food
-item.</p>
+EatSmart AI is an intelligent food recognition and calorie estimation system that uses deep learning to automatically classify food items from images and estimate their nutritional content. Built with a modern Flask web interface and powered by Convolutional Neural Networks (CNN), it helps users maintain healthy eating habits by providing instant calorie information.
 
-**Classes** <br/>
-'Apple', 'Banana', 'Beans', 'Boiled Egg', 'Doughnut', 'Grape', 'MoonCake',
-'Orange', 'Pasta', 'Qiwi'.
+### ✨ Key Features
 
-### Data Preprocessing
-The data preprocessing steps have been listed out here:
-1. Images are resized to 192*192 for the VGG-19 Model, 224*224 for the
-Inception V3 Model, and 400*400 for our Proposed CNN Scratch Model.
-2. Mean RGB pixel intensity is subtracted from the imagenet dataset.
-3. Data augmentation is done by adding images with different orientations and
-varying intensities.
-4. The images were normalized and standardised for pixel scaling.
+- **🎯 Accurate Food Classification**: CNN-based model trained on diverse food datasets
+- **📊 Real-time Calorie Estimation**: Instant nutritional information for classified foods
+- **🎨 Modern Web Interface**: Beautiful, responsive design with smooth animations
+- **📱 Mobile-Friendly**: Optimized for all devices and screen sizes
+- **🔧 Easy Training**: Comprehensive training scripts for custom datasets
+- **📈 Scalable Architecture**: Modular design for easy feature additions
 
-### Methodology
-The proposed methodology for our Problem Statement has been listed out below.
-1. Food Classification using Deep Learning methods: Proposed CNN
-Scratch Model and Pretrained models (VGG-19 and Inception-V3) are used to classify the food item.
-2. Image Segmentation using Otsu Algorithm (Computer Vision): The food
-has been segmented out from the food image in order to find out the exact
-food area using the thumb as a calibration object.
-3. Volume Estimation: The volume of the food item is calculated using the
-shape of the food item.
-4. Calorie Calculation: The calories have been calculated using the density of
-the food item and calorie per 100gm.
+## 🍽️ Supported Food Classes
 
-### Web Server
-The screenshots from the webserver has been added which has 2 parts:
-1. Home
-2. Predict
+The system currently supports classification of the following food items:
 
-#### Home Page
+| Food Item | Calories (per 100g) | Food Item | Calories (per 100g) |
+|-----------|-------------------|-----------|-------------------|
+| 🍎 Apple | 52 kcal | 🍌 Banana | 89 kcal |
+| 🫘 Beans | 337 kcal | 🥚 Boiled Egg | 155 kcal |
+| 🍩 Doughnut | 452 kcal | 🍇 Grape | 62 kcal |
+| 🥮 Mooncake | 266 kcal | 🍊 Orange | 47 kcal |
+| 🍝 Pasta | 131 kcal | 🥝 Kiwi | 61 kcal |
 
-![Home](https://user-images.githubusercontent.com/43794593/154293242-00f0dcf8-d562-4192-a738-bce59acf7078.png)
+## 🚀 Quick Start
 
-#### Predcict Page
+### Prerequisites
 
-![Predict1](https://user-images.githubusercontent.com/43794593/154293267-25c2125a-8746-4fb9-889d-4074a063aef6.png)
+- Python 3.11 or higher
+- Conda (recommended for environment management)
+- Git
 
-![Predict2](https://user-images.githubusercontent.com/43794593/154293296-8f2c0a5e-99d4-4443-b7ce-82a5a7ffc031.png)
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/kamaljyotsingh/eatsmart-ai.git
+   cd eatsmart-ai
+   ```
+
+2. **Create and activate conda environment**
+   ```bash
+   conda create -n eatsmart python=3.11
+   conda activate eatsmart
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the application**
+   ```bash
+   python run.py
+   ```
+
+5. **Open your browser**
+   Navigate to `http://localhost:5000`
+
+## 📸 Screenshots
+
+### 🏠 Home Page
+Our modern home page features a beautiful gradient design with smooth animations and intuitive navigation.
+
+### 🔍 Prediction Interface
+The prediction page allows users to upload food images and get instant classification results with detailed nutritional information.
+
+### 📊 Results Display
+Results are presented in an elegant card layout showing food classification, calorie estimates, and nutritional breakdown.
+
+> **Note**: Screenshots will be updated with actual app images. The current design features a modern gradient interface with smooth animations and responsive layout.
+
+## 🧠 Model Architecture
+
+### CNN Architecture
+Our custom CNN model consists of:
+- **Input Layer**: 224x224x3 RGB images
+- **Convolutional Layers**: Multiple conv layers with ReLU activation
+- **Pooling Layers**: Max pooling for dimension reduction
+- **Dropout**: Regularization to prevent overfitting
+- **Dense Layers**: Fully connected layers for classification
+- **Output Layer**: Softmax activation for multi-class classification
+
+### Training Process
+1. **Data Preprocessing**: Image resizing, normalization, and augmentation
+2. **Model Training**: Using TensorFlow/Keras with callbacks
+3. **Validation**: Cross-validation for model evaluation
+4. **Model Saving**: Best model saved as `.h5` file
+
+## 🎯 Usage
+
+### Web Interface
+1. **Upload Image**: Click "Choose File" to select a food image
+2. **Analyze**: Click "Analyze Image" to process the photo
+3. **View Results**: See classification results and calorie estimates
+4. **Get Details**: View nutritional information and serving suggestions
+
+### Training Custom Model
+See [TRAINING_GUIDE.md](TRAINING_GUIDE.md) for detailed instructions on:
+- Dataset preparation
+- Model training
+- Hyperparameter tuning
+- Model evaluation
+
+## 📁 Project Structure
+
+```
+eatsmart-ai/
+├── run.py                 # Main Flask application
+├── model.py              # CNN model architecture
+├── calorie.py            # Calorie estimation logic
+├── segmentimage.py       # Image segmentation utilities
+├── train_real_model.py   # Training script for real data
+├── requirements.txt      # Python dependencies
+├── static/               # Static assets
+│   ├── images/          # Sample images and logos
+│   └── styles/          # CSS stylesheets
+├── templates/            # HTML templates
+│   ├── index.html       # Home page
+│   ├── predict.html     # Prediction page
+│   └── layout.html      # Base template
+├── images/              # Processing examples
+└── model/               # Trained models (not in repo)
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+Create a `.env` file for custom configurations:
+```env
+FLASK_ENV=development
+MODEL_PATH=model/food_classifier_model.h5
+LABELS_PATH=label.npy
+```
+
+### Model Settings
+Update `run.py` to use your trained model:
+```python
+MODEL_NAME = "your_trained_model.h5"  # Update this after training
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Dataset Sources**: FOODD Dataset and ECUST Food Dataset
+- **Deep Learning**: TensorFlow and Keras frameworks
+- **Web Framework**: Flask for the web interface
+- **UI Design**: Modern CSS with gradient animations
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+- 📧 Create an issue on GitHub
+- 🐛 Report bugs with detailed descriptions
+- 💡 Suggest new features
+
+---
+
+<div align="center">
+  <p>Made with ❤️ for healthy eating</p>
+  <p>⭐ Star this repository if you found it helpful!</p>
+</div>
 
 
 
